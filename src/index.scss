@@ -4,6 +4,10 @@
   font-family: 'Roboto Mono';
 }
 
+body {
+  overflow-x: hidden;
+}
+
 #root {
   display: flex;
   align-items: center;

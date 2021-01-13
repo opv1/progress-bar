@@ -66,6 +66,7 @@ function ProgressPanel() {
               cx={center}
               cy={center}
               r={radius}
+              transform={`rotate(-90, ${center}, ${center})`}
             />
             <text
               className='progress-ring__percent'

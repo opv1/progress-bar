@@ -36,7 +36,9 @@ function ProgressPanel() {
   return (
     <div className='progress-panel'>
       {hide ? (
-        <span className='progress-hide'>Progress block is hidden!</span>
+        <span className='progress-hide' style={{ width: `${size}px` }}>
+          Progress block is hidden!
+        </span>
       ) : (
         <div className='progress-block' style={{ width: `${size}px` }}>
           <span
@@ -47,7 +49,7 @@ function ProgressPanel() {
           </span>
           <svg className='progress-ring' width={size} height={size}>
             <circle
-              className='progress-ring__bg'
+              className='progress-ring__inner'
               stroke={strokeInner}
               strokeWidth={strokeWidth}
               cx={center}
@@ -55,7 +57,7 @@ function ProgressPanel() {
               r={radius}
             />
             <circle
-              className='progress-ring__bar'
+              className='progress-ring__outer'
               ref={circleRef}
               stroke={strokeOuter}
               strokeWidth={strokeWidth}
@@ -66,7 +68,7 @@ function ProgressPanel() {
               r={radius}
             />
             <text
-              className='progress-ring__text'
+              className='progress-ring__percent'
               x={`${center}`}
               y={`${center}`}
             >
@@ -75,7 +77,9 @@ function ProgressPanel() {
           </svg>
           <span
             className='progress-timer'
-            style={animateValue ? { opacity: '1' } : {}}
+            style={
+              animateValue && Number(animateValue) !== 0 ? { opacity: '1' } : {}
+            }
           >
             {timer}
           </span>

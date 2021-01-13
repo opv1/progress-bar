@@ -60,7 +60,7 @@ function ControlPanel() {
           <input
             onChange={(e) => onStartAnimate(e.target)}
             type='checkbox'
-            disabled={!animateValue || hide}
+            disabled={!animateValue || Number(animateValue) === 0 || hide}
           />
           Animate
         </label>

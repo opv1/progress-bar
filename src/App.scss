@@ -5,11 +5,13 @@
   justify-content: space-around;
   border-radius: 50px;
   width: 90%;
-  height: 90%;
   min-width: 320px;
   min-height: 750px;
-  box-shadow: -5px -5px 20px rgba(255, 255, 255, 0.1),
-    5px 5px 10px rgba(0, 0, 0, 1), inset -2px -2px 5px rgba(255, 255, 255, 0.1),
-    inset 2px 2px 5px rgba(0, 0, 0, 0.5), 0 0 0 2px #1f1f1f;
+  box-shadow:
+    -5px -5px 20px rgba(255, 255, 255, 0.1),
+    5px 5px 10px rgba(0, 0, 0, 1),
+    inset -2px -2px 5px rgba(255, 255, 255, 0.1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.5),
+    0 0 0 2px #1f1f1f;
   background-color: #414141;
 }

@@ -8,7 +8,7 @@ import {
   SET_ANIMATE_VALUE,
   SET_ANIMATE_TIME,
   SET_HIDE,
-} from './types'
+} from 'context/types'
 
 const handlers = {
   [SET_PROGRESS]: (state, { payload }) => ({

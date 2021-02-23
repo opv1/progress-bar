@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-import { AppContext } from '../../context/AppContext'
-import './ControlPanel.scss'
+import { AppContext } from 'context/AppContext'
+import 'components/ControlPanel/ControlPanel.scss'
 
 function ControlPanel() {
   const {

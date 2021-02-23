@@ -1,7 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import propTypes from 'prop-types'
-import { AppContext } from '../../context/AppContext'
-import './ProgressPanel.scss'
+import { AppContext } from 'context/AppContext'
+import 'components/ProgressPanel/ProgressPanel.scss'
 
 function ProgressPanel() {
   const {

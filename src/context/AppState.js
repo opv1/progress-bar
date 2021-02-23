@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react'
-import { AppContext } from './AppContext'
-import { appReducer } from './appReducer'
+import { AppContext } from 'context/AppContext'
+import { appReducer } from 'context/appReducer'
 import {
   SET_PROGRESS,
   SET_TIMER,
@@ -11,8 +11,8 @@ import {
   SET_ANIMATE_VALUE,
   SET_ANIMATE_TIME,
   SET_HIDE,
-} from './types'
-import { randomColor, statusChecked, setTimer } from '../utils'
+} from 'context/types'
+import { randomColor, statusChecked, setTimer } from 'utils'
 
 function AppState({ children }) {
   const initialState = {
@@ -63,10 +63,7 @@ function AppState({ children }) {
   let secondsCounter = animateTime
 
   const onCustomValue = (value) => {
-    dispatch({
-      type: SET_CUSTOM_VALUE,
-      payload: value,
-    })
+    dispatch({ type: SET_CUSTOM_VALUE, payload: value })
 
     let integerValue = parseInt(value, 10)
 
@@ -75,64 +72,35 @@ function AppState({ children }) {
         integerValue = 100
       }
 
-      dispatch({
-        type: SET_PROGRESS,
-        payload: integerValue,
-      })
+      dispatch({ type: SET_PROGRESS, payload: integerValue })
     } else {
-      dispatch({
-        type: SET_PROGRESS,
-        payload: 0,
-      })
+      dispatch({ type: SET_PROGRESS, payload: 0 })
     }
   }
 
   const onRandomValue = (e) => {
     e.preventDefault()
 
-    dispatch({
-      type: SET_PROGRESS,
-      payload: Math.floor(Math.random() * 101),
-    })
-
-    dispatch({
-      type: SET_CUSTOM_VALUE,
-      payload: '',
-    })
+    dispatch({ type: SET_PROGRESS, payload: Math.floor(Math.random() * 101) })
+    dispatch({ type: SET_CUSTOM_VALUE, payload: '' })
   }
 
   const onRandomColor = (checked) => {
     if (checked) {
-      dispatch({
-        type: SET_COLOR,
-        payload: randomColor(colorArray),
-      })
+      dispatch({ type: SET_COLOR, payload: randomColor(colorArray) })
     } else {
-      dispatch({
-        type: SET_COLOR,
-        payload: defaultColor,
-      })
+      dispatch({ type: SET_COLOR, payload: defaultColor })
     }
   }
 
   const onAnimateValue = (value) => {
-    dispatch({
-      type: SET_ANIMATE_VALUE,
-      payload: value,
-    })
-
-    dispatch({
-      type: SET_ANIMATE_TIME,
-      payload: parseInt(value, 10),
-    })
+    dispatch({ type: SET_ANIMATE_VALUE, payload: value })
+    dispatch({ type: SET_ANIMATE_TIME, payload: parseInt(value, 10) })
 
     const timer = setTimer(parseInt(value, 10))
 
     if (timer) {
-      dispatch({
-        type: SET_TIMER,
-        payload: `${timer.min}:${timer.sec}`,
-      })
+      dispatch({ type: SET_TIMER, payload: `${timer.min}:${timer.sec}` })
     }
   }
 
@@ -143,41 +111,20 @@ function AppState({ children }) {
       ((animateTime - secondsCounter) / animateTime) * 100
     )
 
-    dispatch({
-      type: SET_PROGRESS,
-      payload: percent,
-    })
+    dispatch({ type: SET_PROGRESS, payload: percent })
 
     if (secondsCounter === 0) {
       clearInterval(window.intervalId)
 
-      dispatch({
-        type: SET_DONE_ANIMATE,
-        payload: true,
-      })
+      dispatch({ type: SET_DONE_ANIMATE, payload: true })
 
       return setTimeout(() => {
         statusChecked(target)
 
-        dispatch({
-          type: SET_DONE_ANIMATE,
-          payload: false,
-        })
-
-        dispatch({
-          type: SET_ANIMATE,
-          payload: false,
-        })
-
-        dispatch({
-          type: SET_ANIMATE_VALUE,
-          payload: '',
-        })
-
-        dispatch({
-          type: SET_PROGRESS,
-          payload: 0,
-        })
+        dispatch({ type: SET_DONE_ANIMATE, payload: false })
+        dispatch({ type: SET_ANIMATE, payload: false })
+        dispatch({ type: SET_ANIMATE_VALUE, payload: '' })
+        dispatch({ type: SET_PROGRESS, payload: 0 })
       }, waitTime)
     }
   }
@@ -185,54 +132,32 @@ function AppState({ children }) {
   const startTimer = () => {
     const timer = setTimer(secondsCounter)
 
-    dispatch({
-      type: SET_TIMER,
-      payload: `${timer.min}:${timer.sec}`,
-    })
+    dispatch({ type: SET_TIMER, payload: `${timer.min}:${timer.sec}` })
   }
 
   const onStartAnimate = (target) => {
     if (target.checked) {
-      dispatch({
-        type: SET_ANIMATE,
-        payload: true,
-      })
-
-      dispatch({
-        type: SET_CUSTOM_VALUE,
-        payload: '',
-      })
+      dispatch({ type: SET_ANIMATE, payload: true })
+      dispatch({ type: SET_CUSTOM_VALUE, payload: '' })
 
       window.intervalId = setInterval(() => {
         finalCountdown(target)
         startTimer()
       }, 1000)
     } else {
-      dispatch({
-        type: SET_ANIMATE,
-        payload: false,
-      })
-
-      dispatch({
-        type: SET_PROGRESS,
-        payload: 0,
-      })
+      dispatch({ type: SET_ANIMATE, payload: false })
+      dispatch({ type: SET_PROGRESS, payload: 0 })
 
       const timer = setTimer(secondsCounter)
 
-      dispatch({
-        type: SET_TIMER,
-        payload: `${timer.min}:${timer.sec}`,
-      })
+      dispatch({ type: SET_TIMER, payload: `${timer.min}:${timer.sec}` })
 
       clearInterval(window.intervalId)
     }
   }
 
   const onHideBlock = () => {
-    dispatch({
-      type: SET_HIDE,
-    })
+    dispatch({ type: SET_HIDE })
   }
 
   return (

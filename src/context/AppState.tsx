@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, MouseEvent } from 'react'
 import { appReducer } from 'context/appReducer'
 import { AppCntxt, AppActionTypes } from 'context/types'
 import { randomColor, statusChecked, setTimer } from 'utils'
@@ -69,7 +69,9 @@ export const AppState: React.FC<Props> = ({ children }) => {
     }
   }
 
-  const onRandomValue = () => {
+  const onRandomValue = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+
     dispatch({
       type: AppActionTypes.SET_PROGRESS,
       payload: Math.floor(Math.random() * 101),

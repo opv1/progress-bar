@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react'
+
 export type AppState = {
   progress: number
   timer: string
@@ -18,7 +20,7 @@ export type AppState = {
 export type AppCntxt = {
   state: AppState
   onCustomValue?: (value: string) => void
-  onRandomValue?: () => void
+  onRandomValue?: (event: MouseEvent<HTMLButtonElement>) => void
   onRandomColor?: (checked: boolean) => void
   onAnimateValue?: (value: string) => void
   onStartAnimate?: (target: HTMLInputElement) => void

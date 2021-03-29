@@ -5,7 +5,7 @@
 
 ## Description
 
-Stack: React
+Stack: React + TypeScript
 
 ## [See the project](https://opv1.github.io/progress-bar/)
 

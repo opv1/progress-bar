@@ -1,13 +1,10 @@
 import React, { useContext } from 'react'
-import { AppContext } from 'context/AppContext'
+import { AppContext } from 'context/AppState'
 import 'components/ControlPanel/ControlPanel.scss'
 
-function ControlPanel() {
+const ControlPanel: React.FC = () => {
   const {
-    customValue,
-    animate,
-    animateValue,
-    hide,
+    state,
     onCustomValue,
     onRandomValue,
     onRandomColor,
@@ -21,11 +18,11 @@ function ControlPanel() {
       <label className='control-label'>
         <input
           className='control-label__input'
-          onChange={(e) => onCustomValue(e.target.value)}
-          value={customValue}
+          onChange={(event) => onCustomValue!(event.target.value)}
+          value={state.customValue}
           type='number'
           placeholder='0'
-          disabled={animate || hide}
+          disabled={state.animate || state.hide}
         />
         Custom value
       </label>
@@ -33,14 +30,14 @@ function ControlPanel() {
         <button
           className='control-block__button'
           onClick={onRandomValue}
-          disabled={animate || hide}
+          disabled={state.animate || state.hide}
         ></button>
       </div>
       <label className='control-label'>
         <input
-          onChange={(e) => onRandomColor(e.target.checked)}
+          onChange={(event) => onRandomColor!(event.target.checked)}
           type='checkbox'
-          disabled={hide}
+          disabled={state.hide}
         />
         Random color
       </label>
@@ -48,25 +45,33 @@ function ControlPanel() {
         <label className='control-label'>
           <input
             className='control-label__input'
-            onChange={(e) => onAnimateValue(e.target.value)}
-            value={animateValue}
+            onChange={(event) => onAnimateValue!(event.target.value)}
+            value={state.animateValue}
             type='number'
             placeholder='0'
-            disabled={animate || hide}
+            disabled={state.animate || state.hide}
           />
           Seconds
         </label>
         <label className='control-label'>
           <input
-            onChange={(e) => onStartAnimate(e.target)}
+            onChange={(event) => onStartAnimate!(event.target)}
             type='checkbox'
-            disabled={!animateValue || Number(animateValue) === 0 || hide}
+            disabled={
+              !state.animateValue ||
+              Number(state.animateValue) === 0 ||
+              state.hide
+            }
           />
           Animate
         </label>
       </div>
       <label className='control-label'>
-        <input onChange={onHideBlock} type='checkbox' disabled={animate} />
+        <input
+          onChange={onHideBlock}
+          type='checkbox'
+          disabled={state.animate}
+        />
         Hide progress panel
       </label>
     </form>

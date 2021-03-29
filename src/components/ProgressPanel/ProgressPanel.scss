@@ -33,6 +33,7 @@
 
   &__outer {
     fill: none;
+    transition: stroke-dashoffset 850ms ease-in-out;
   }
 
   &__percent {

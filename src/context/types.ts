@@ -1,42 +1,30 @@
-import { MouseEvent } from 'react'
-
 export type AppState = {
   progress: number
   timer: string
   customValue: string
-  defaultColor: string
-  colorArray: string[]
-  animate: boolean
+  startAnimate: boolean
   doneAnimate: boolean
   animateValue: string
   animateTime: number
-  size: number
+  hideProgress: boolean
+  sizeRing: number
   strokeWidth: number
   strokeInner: string
   strokeOuter: string
-  hide: boolean
-}
-
-export type AppCntxt = {
-  state: AppState
-  onCustomValue?: (value: string) => void
-  onRandomValue?: (event: MouseEvent<HTMLButtonElement>) => void
-  onRandomColor?: (checked: boolean) => void
-  onAnimateValue?: (value: string) => void
-  onStartAnimate?: (target: HTMLInputElement) => void
-  onHideBlock?: () => void
+  defaultColor: string
+  colorArray: string[]
 }
 
 export enum AppActionTypes {
   SET_PROGRESS = 'SET_PROGRESS',
-  SET_TIMER = 'SET_TIMER',
+  SET_TIME = 'SET_TIME',
   SET_CUSTOM_VALUE = 'SET_CUSTOM_VALUE',
   SET_COLOR = 'SET_COLOR',
-  SET_ANIMATE = 'SET_ANIMATE',
+  SET_START_ANIMATE = 'SET_START_ANIMATE',
   SET_DONE_ANIMATE = 'SET_DONE_ANIMATE',
   SET_ANIMATE_VALUE = 'SET_ANIMATE_VALUE',
   SET_ANIMATE_TIME = 'SET_ANIMATE_TIME',
-  SET_HIDE = 'SET_HIDE',
+  SET_HIDE_PROGRESS = 'SET_HIDE_PROGRESS',
 }
 
 interface ISetProgress {
@@ -45,7 +33,7 @@ interface ISetProgress {
 }
 
 interface ISetTimer {
-  type: AppActionTypes.SET_TIMER
+  type: AppActionTypes.SET_TIME
   payload: string
 }
 
@@ -60,7 +48,7 @@ interface ISetColor {
 }
 
 interface ISetAnimate {
-  type: AppActionTypes.SET_ANIMATE
+  type: AppActionTypes.SET_START_ANIMATE
   payload: boolean
 }
 
@@ -80,7 +68,7 @@ interface ISetDoneAnimate {
 }
 
 interface ISetHide {
-  type: AppActionTypes.SET_HIDE
+  type: AppActionTypes.SET_HIDE_PROGRESS
 }
 
 export type AppAction =

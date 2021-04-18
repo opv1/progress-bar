@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from 'context/AppState'
 import 'components/ControlPanel/ControlPanel.scss'
 
@@ -10,71 +10,107 @@ const ControlPanel: React.FC = () => {
     onRandomColor,
     onAnimateValue,
     onStartAnimate,
-    onHideBlock,
+    onHideProgress,
+    finalCountdown,
+    resetProgress,
   } = useContext(AppContext)
+  const {
+    customValue,
+    startAnimate,
+    animateValue,
+    animateTime,
+    hideProgress,
+    doneAnimate,
+  } = state
+
+  useEffect(() => {
+    if (startAnimate && animateTime !== 0) {
+      window.intervalId = setInterval(() => {
+        finalCountdown!()
+      }, 1000)
+    } else {
+      clearInterval(window.intervalId)
+    }
+
+    return () => clearInterval(window.intervalId)
+    // eslint-disable-next-line
+  }, [startAnimate, animateTime])
+
+  useEffect(() => {
+    if (doneAnimate) {
+      window.timeoutId = setTimeout(() => {
+        resetProgress!()
+      }, 3000)
+    } else {
+      clearTimeout(window.timeoutId)
+    }
+
+    return () => clearTimeout(window.timeoutId)
+    // eslint-disable-next-line
+  }, [doneAnimate])
 
   return (
-    <form className='control-panel'>
-      <label className='control-label'>
+    <div className='control'>
+      <label className='control__label'>
         <input
-          className='control-label__input'
+          className='control__input'
           onChange={(event) => onCustomValue!(event.target.value)}
-          value={state.customValue}
+          value={customValue}
           type='number'
           placeholder='0'
-          disabled={state.animate || state.hide}
+          disabled={startAnimate || hideProgress}
         />
         Custom value
       </label>
-      <div className='control-block'>
+      <div className='control__block'>
         <button
-          className='control-block__button'
+          className='control__button'
           onClick={onRandomValue}
-          disabled={state.animate || state.hide}
+          disabled={startAnimate || hideProgress}
         ></button>
       </div>
-      <label className='control-label'>
+      <label className='control__label'>
         <input
           onChange={(event) => onRandomColor!(event.target.checked)}
           type='checkbox'
-          disabled={state.hide}
+          disabled={hideProgress}
         />
         Random color
       </label>
-      <div className='control-block'>
-        <label className='control-label'>
+      <div className='control__block'>
+        <label className='control__label'>
           <input
-            className='control-label__input'
+            className='control__input'
             onChange={(event) => onAnimateValue!(event.target.value)}
-            value={state.animateValue}
+            value={animateValue}
             type='number'
             placeholder='0'
-            disabled={state.animate || state.hide}
+            disabled={startAnimate || hideProgress}
           />
           Seconds
         </label>
-        <label className='control-label'>
+        <label className='control__label'>
           <input
-            onChange={(event) => onStartAnimate!(event.target)}
+            onChange={(event) => onStartAnimate!(event.target.checked)}
             type='checkbox'
+            checked={startAnimate}
             disabled={
-              !state.animateValue ||
-              Number(state.animateValue) === 0 ||
-              state.hide
+              !animateValue || Number(animateValue) === 0 || hideProgress
             }
           />
           Animate
         </label>
       </div>
-      <label className='control-label'>
+      <label className='control__label'>
         <input
-          onChange={onHideBlock}
+          onChange={onHideProgress}
           type='checkbox'
-          disabled={state.animate}
+          checked={hideProgress}
+          disabled={startAnimate}
         />
-        Hide progress panel
+        Hide progress
       </label>
-    </form>
+    </div>
   )
 }
 

@@ -12,12 +12,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
+  min-width: 320px;
+  min-height: 100vh;
+  max-height: 100%;
   background-color: #313131;
-}
-
-@media screen and (min-width: 829px) {
-  #root {
-    height: 100vh;
-  }
 }

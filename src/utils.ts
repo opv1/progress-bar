@@ -1,16 +1,14 @@
-export const randomColor = (colorArray: string[]) => {
+export const getRandomColor = (colorArray: string[]) => {
   return colorArray[Math.floor(Math.random() * colorArray.length)]
 }
 
-export const statusChecked = (target: HTMLInputElement) => {
-  target.checked = false
+export const getParseInt = (value: string) => {
+  return parseInt(value, 10)
 }
 
-export const setTimer = (counter: number) => {
-  if (counter >= 0) {
-    const min = Math.floor(counter / 60)
-    const sec = counter % 60 > 9 ? counter % 60 : `0${counter % 60}`
+export const getTime = (counter: number) => {
+  const min = Math.floor(counter / 60)
+  const sec = counter % 60 > 9 ? counter % 60 : `0${counter % 60}`
 
-    return { min, sec }
-  }
+  return { min, sec }
 }

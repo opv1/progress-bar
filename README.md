@@ -7,13 +7,9 @@
 
 Stack: React + TypeScript
 
-## [See the project](https://opv1.github.io/progress-bar/)
+## [See the project](https://opv1.github.io/progress-bar)
 
 ## Setup
-
-```
-npm run build
-```
 
 ```
 npm run start

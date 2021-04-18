@@ -1,13 +1,13 @@
 import { AppState, AppAction, AppActionTypes } from 'context/types'
 
-export const appReducer = (state: AppState, action: AppAction) => {
+export const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
     case AppActionTypes.SET_PROGRESS:
       return {
         ...state,
         progress: action.payload,
       }
-    case AppActionTypes.SET_TIMER:
+    case AppActionTypes.SET_TIME:
       return {
         ...state,
         timer: action.payload,
@@ -22,10 +22,10 @@ export const appReducer = (state: AppState, action: AppAction) => {
         ...state,
         strokeOuter: action.payload,
       }
-    case AppActionTypes.SET_ANIMATE:
+    case AppActionTypes.SET_START_ANIMATE:
       return {
         ...state,
-        animate: action.payload,
+        startAnimate: action.payload,
       }
     case AppActionTypes.SET_DONE_ANIMATE:
       return {
@@ -42,10 +42,10 @@ export const appReducer = (state: AppState, action: AppAction) => {
         ...state,
         animateTime: action.payload,
       }
-    case AppActionTypes.SET_HIDE:
+    case AppActionTypes.SET_HIDE_PROGRESS:
       return {
         ...state,
-        hide: !state.hide,
+        hideProgress: !state.hideProgress,
       }
     default:
       return state

@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import { appReducer } from 'context/appReducer'
 import { AppState, AppActionTypes } from 'context/types'
-import { getRandomColor, getTime, getParseInt } from 'utils'
+import { getRandomColor, getParseInt, getTime } from 'utils'
 
 declare global {
   interface Window {

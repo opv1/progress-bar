@@ -7,12 +7,14 @@ import Input from 'components/UI/Input'
 
 const Control: React.FC = () => {
   const {
+    theme,
     customValue,
     startAnimate,
     animateValue,
     animateTime,
     hideProgress,
     doneAnimate,
+    toggleTheme,
     onCustomValue,
     onRandomValue,
     onRandomColor,
@@ -100,6 +102,13 @@ const Control: React.FC = () => {
           type='checkbox'
           checked={hideProgress}
           disabled={startAnimate}
+        />
+      </Label>
+      <Label title='Theme'>
+        <Input
+          onChange={toggleTheme}
+          type='checkbox'
+          checked={theme === 'light'}
         />
       </Label>
     </ControlWrapper>

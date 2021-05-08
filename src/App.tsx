@@ -4,7 +4,6 @@ import { GlobalStyles, darkTheme, lightTheme } from 'styles/globalStyles'
 import { AppContext } from 'context/AppState'
 import Progress from 'components/Progress'
 import Control from 'components/Control'
-import Toggle from 'components/Toggle'
 
 const App: React.FC = () => {
   const { theme } = useContext(AppContext)
@@ -15,7 +14,6 @@ const App: React.FC = () => {
       <AppWrapper>
         <Progress />
         <Control />
-        <Toggle />
       </AppWrapper>
     </ThemeProvider>
   )

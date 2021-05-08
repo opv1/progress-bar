@@ -1,8 +1,11 @@
 import React, { useContext, useEffect } from 'react'
+import styled from 'styled-components'
 import { AppContext } from 'context/AppState'
-import 'components/ControlPanel/ControlPanel.scss'
+import Button from 'components/UI/Button'
+import Label from 'components/UI/Label'
+import Input from 'components/UI/Input'
 
-const ControlPanel: React.FC = () => {
+const Control: React.FC = () => {
   const {
     state,
     onCustomValue,
@@ -50,47 +53,41 @@ const ControlPanel: React.FC = () => {
   }, [doneAnimate])
 
   return (
-    <div className='control'>
-      <label className='control__label'>
-        <input
-          className='control__input'
+    <ControlWrapper>
+      <Label title='Custom value'>
+        <Input
           onChange={(event) => onCustomValue!(event.target.value)}
           value={customValue}
           type='number'
           placeholder='0'
           disabled={startAnimate || hideProgress}
         />
-        Custom value
-      </label>
-      <div className='control__block'>
-        <button
-          className='control__button'
-          onClick={onRandomValue}
+      </Label>
+      <ControlBlock>
+        <Button
+          onClick={onRandomValue!}
           disabled={startAnimate || hideProgress}
-        ></button>
-      </div>
-      <label className='control__label'>
-        <input
+        />
+      </ControlBlock>
+      <Label title='Random color'>
+        <Input
           onChange={(event) => onRandomColor!(event.target.checked)}
           type='checkbox'
           disabled={hideProgress}
         />
-        Random color
-      </label>
-      <div className='control__block'>
-        <label className='control__label'>
-          <input
-            className='control__input'
+      </Label>
+      <ControlBlock>
+        <Label title='Seconds'>
+          <Input
             onChange={(event) => onAnimateValue!(event.target.value)}
             value={animateValue}
             type='number'
             placeholder='0'
             disabled={startAnimate || hideProgress}
           />
-          Seconds
-        </label>
-        <label className='control__label'>
-          <input
+        </Label>
+        <Label title='Animate'>
+          <Input
             onChange={(event) => onStartAnimate!(event.target.checked)}
             type='checkbox'
             checked={startAnimate}
@@ -98,20 +95,30 @@ const ControlPanel: React.FC = () => {
               !animateValue || Number(animateValue) === 0 || hideProgress
             }
           />
-          Animate
-        </label>
-      </div>
-      <label className='control__label'>
-        <input
-          onChange={onHideProgress}
+        </Label>
+      </ControlBlock>
+      <Label title='Hide progress'>
+        <Input
+          onChange={() => onHideProgress!()}
           type='checkbox'
           checked={hideProgress}
           disabled={startAnimate}
         />
-        Hide progress
-      </label>
-    </div>
+      </Label>
+    </ControlWrapper>
   )
 }
 
-export default ControlPanel
+export default Control
+
+const ControlWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+`
+
+const ControlBlock = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+`

@@ -7,7 +7,7 @@
 
 ## Description
 
-Stack: React + TypeScript
+Stack: React + TypeScript + Styled-components
 
 ## Setup
 

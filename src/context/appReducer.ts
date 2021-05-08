@@ -2,6 +2,11 @@ import { AppState, AppAction, AppActionTypes } from 'context/types'
 
 export const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
+    case AppActionTypes.SET_THEME:
+      return {
+        ...state,
+        theme: action.payload,
+      }
     case AppActionTypes.SET_PROGRESS:
       return {
         ...state,

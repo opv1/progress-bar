@@ -1,4 +1,5 @@
 export type AppState = {
+  theme: string
   progress: number
   timer: string
   customValue: string
@@ -16,6 +17,7 @@ export type AppState = {
 }
 
 export enum AppActionTypes {
+  SET_THEME = 'SET_THEME',
   SET_PROGRESS = 'SET_PROGRESS',
   SET_TIME = 'SET_TIME',
   SET_CUSTOM_VALUE = 'SET_CUSTOM_VALUE',
@@ -25,6 +27,11 @@ export enum AppActionTypes {
   SET_ANIMATE_VALUE = 'SET_ANIMATE_VALUE',
   SET_ANIMATE_TIME = 'SET_ANIMATE_TIME',
   SET_HIDE_PROGRESS = 'SET_HIDE_PROGRESS',
+}
+
+interface ISetTheme {
+  type: AppActionTypes.SET_THEME
+  payload: string
 }
 
 interface ISetProgress {
@@ -72,6 +79,7 @@ interface ISetHide {
 }
 
 export type AppAction =
+  | ISetTheme
   | ISetProgress
   | ISetTimer
   | ISetCustomValue

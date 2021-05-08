@@ -11,6 +11,7 @@ declare global {
 }
 
 const initialState = {
+  theme: 'dark',
   progress: 0,
   timer: '0:00',
   customValue: '',
@@ -36,6 +37,7 @@ const initialState = {
 
 type Context = {
   state: AppState
+  toggleTheme?: () => void
   onCustomValue?: (value: string) => void
   onRandomValue?: () => void
   onRandomColor?: (checked: boolean) => void
@@ -54,6 +56,18 @@ interface Provider {
 
 export const AppProvider: React.FC<Provider> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState)
+
+  const toggleTheme = () => {
+    state.theme === 'dark'
+      ? dispatch({
+          type: AppActionTypes.SET_THEME,
+          payload: 'light',
+        })
+      : dispatch({
+          type: AppActionTypes.SET_THEME,
+          payload: 'dark',
+        })
+  }
 
   const onCustomValue = (value: string) => {
     dispatch({
@@ -226,6 +240,7 @@ export const AppProvider: React.FC<Provider> = ({ children }) => {
     <AppContext.Provider
       value={{
         state,
+        toggleTheme,
         onCustomValue,
         onRandomValue,
         onRandomColor,

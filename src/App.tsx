@@ -7,10 +7,10 @@ import Control from 'components/Control'
 import Toggle from 'components/Toggle'
 
 const App: React.FC = () => {
-  const { state } = useContext(AppContext)
+  const { theme } = useContext(AppContext)
 
   return (
-    <ThemeProvider theme={state.theme === 'dark' ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyles />
       <AppWrapper>
         <Progress />

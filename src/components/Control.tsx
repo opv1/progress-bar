@@ -7,7 +7,12 @@ import Input from 'components/UI/Input'
 
 const Control: React.FC = () => {
   const {
-    state,
+    customValue,
+    startAnimate,
+    animateValue,
+    animateTime,
+    hideProgress,
+    doneAnimate,
     onCustomValue,
     onRandomValue,
     onRandomColor,
@@ -17,19 +22,11 @@ const Control: React.FC = () => {
     finalCountdown,
     resetProgress,
   } = useContext(AppContext)
-  const {
-    customValue,
-    startAnimate,
-    animateValue,
-    animateTime,
-    hideProgress,
-    doneAnimate,
-  } = state
 
   useEffect(() => {
     if (startAnimate && animateTime !== 0) {
       window.intervalId = setInterval(() => {
-        finalCountdown!()
+        finalCountdown()
       }, 1000)
     } else {
       clearInterval(window.intervalId)
@@ -42,7 +39,7 @@ const Control: React.FC = () => {
   useEffect(() => {
     if (doneAnimate) {
       window.timeoutId = setTimeout(() => {
-        resetProgress!()
+        resetProgress()
       }, 3000)
     } else {
       clearTimeout(window.timeoutId)
@@ -56,7 +53,7 @@ const Control: React.FC = () => {
     <ControlWrapper>
       <Label title='Custom value'>
         <Input
-          onChange={(event) => onCustomValue!(event.target.value)}
+          onChange={(event) => onCustomValue(event.target.value)}
           value={customValue}
           type='number'
           placeholder='0'
@@ -65,13 +62,13 @@ const Control: React.FC = () => {
       </Label>
       <ControlBlock>
         <Button
-          onClick={onRandomValue!}
+          onClick={onRandomValue}
           disabled={startAnimate || hideProgress}
         />
       </ControlBlock>
       <Label title='Random color'>
         <Input
-          onChange={(event) => onRandomColor!(event.target.checked)}
+          onChange={(event) => onRandomColor(event.target.checked)}
           type='checkbox'
           disabled={hideProgress}
         />
@@ -79,7 +76,7 @@ const Control: React.FC = () => {
       <ControlBlock>
         <Label title='Seconds'>
           <Input
-            onChange={(event) => onAnimateValue!(event.target.value)}
+            onChange={(event) => onAnimateValue(event.target.value)}
             value={animateValue}
             type='number'
             placeholder='0'
@@ -88,7 +85,7 @@ const Control: React.FC = () => {
         </Label>
         <Label title='Animate'>
           <Input
-            onChange={(event) => onStartAnimate!(event.target.checked)}
+            onChange={(event) => onStartAnimate(event.target.checked)}
             type='checkbox'
             checked={startAnimate}
             disabled={
@@ -99,7 +96,7 @@ const Control: React.FC = () => {
       </ControlBlock>
       <Label title='Hide progress'>
         <Input
-          onChange={() => onHideProgress!()}
+          onChange={onHideProgress}
           type='checkbox'
           checked={hideProgress}
           disabled={startAnimate}

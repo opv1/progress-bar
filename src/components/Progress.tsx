@@ -4,7 +4,6 @@ import { AppContext } from 'context/AppState'
 
 const Progress: React.FC = () => {
   const [offset, setOffset] = useState<number>(0)
-  const { state } = useContext(AppContext)
   const {
     progress,
     timer,
@@ -15,9 +14,9 @@ const Progress: React.FC = () => {
     strokeOuter,
     strokeWidth,
     hideProgress,
-  } = state
+  } = useContext(AppContext)
 
-  const center = state.sizeRing / 2
+  const center = sizeRing / 2
   const radius = sizeRing / 2 - strokeWidth / 2
   const circumference = 2 * Math.PI * radius
 

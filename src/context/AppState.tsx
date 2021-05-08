@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const initialState = {
+const initialState: AppState = {
   theme: 'dark',
   progress: 0,
   timer: '0:00',
@@ -33,22 +33,18 @@ const initialState = {
     '#7bff00',
     '#fa6900',
   ],
+  toggleTheme: () => null,
+  onCustomValue: () => null,
+  onRandomValue: () => null,
+  onRandomColor: () => null,
+  onAnimateValue: () => null,
+  onStartAnimate: () => null,
+  onHideProgress: () => null,
+  finalCountdown: () => null,
+  resetProgress: () => null,
 }
 
-type Context = {
-  state: AppState
-  toggleTheme?: () => void
-  onCustomValue?: (value: string) => void
-  onRandomValue?: () => void
-  onRandomColor?: (checked: boolean) => void
-  onAnimateValue?: (value: string) => void
-  onStartAnimate?: (checked: boolean) => void
-  onHideProgress?: () => void
-  finalCountdown?: () => void
-  resetProgress?: () => void
-}
-
-export const AppContext = createContext<Context>({ state: initialState })
+export const AppContext = createContext<AppState>({ ...initialState })
 
 interface Provider {
   children: React.ReactNode
@@ -239,7 +235,7 @@ export const AppProvider: React.FC<Provider> = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        state,
+        ...state,
         toggleTheme,
         onCustomValue,
         onRandomValue,

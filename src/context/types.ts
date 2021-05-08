@@ -14,6 +14,15 @@ export type AppState = {
   strokeOuter: string
   defaultColor: string
   colorArray: string[]
+  toggleTheme: () => void
+  onCustomValue: (value: string) => void
+  onRandomValue: () => void
+  onRandomColor: (checked: boolean) => void
+  onAnimateValue: (value: string) => void
+  onStartAnimate: (checked: boolean) => void
+  onHideProgress: () => void
+  finalCountdown: () => void
+  resetProgress: () => void
 }
 
 export enum AppActionTypes {

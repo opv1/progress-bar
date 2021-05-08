@@ -5,15 +5,15 @@ import Label from 'components/UI/Label'
 import Input from 'components/UI/Input'
 
 const Toggle: React.FC = () => {
-  const { state, toggleTheme } = useContext(AppContext)
+  const { theme, toggleTheme } = useContext(AppContext)
 
   return (
     <ToggleWrapper>
       <Label title='Theme'>
         <Input
-          onChange={() => toggleTheme!()}
+          onChange={toggleTheme}
           type='checkbox'
-          checked={state.theme === 'light'}
+          checked={theme === 'light'}
         />
       </Label>
     </ToggleWrapper>

@@ -28,7 +28,6 @@ export const GlobalStyles = createGlobalStyle<GlobalStylesProps>`
     justify-content: center;
     min-width: 320px;
     min-height: 100vh;
-    max-height: 100%;
   }
 `
 

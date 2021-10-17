@@ -33,8 +33,6 @@ const InputWrapper = styled.input<{ type: string }>`
   ${(props) =>
     props.type === 'number' &&
     css`
-      appearance: textfield;
-
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
         appearance: none;
@@ -52,9 +50,11 @@ const InputWrapper = styled.input<{ type: string }>`
     css`
       appearance: none;
       position: relative;
+      overflow: hidden;
       background: ${({ theme }) => theme.darkColor};
       transition: 0.5s;
       cursor: pointer;
+      clip: rect(0 0 0 0);
 
       &::before {
         content: '';

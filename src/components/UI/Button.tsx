@@ -13,6 +13,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 export default Button
 
 const ButtonWrapper = styled.button`
+  appearance: none;
   position: relative;
   margin: 1rem;
   outline: none;
